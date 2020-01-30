@@ -12,6 +12,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Файл"
@@ -24,7 +25,7 @@
             </MenuItem>
         </Menu>
 
-        <Rectangle Stroke="Gray" Grid.RowSpan="3" />
+        <Rectangle Stroke="Gray" Grid.RowSpan="4" />
         <Rectangle Stroke="Gray" Grid.Row="1" />
 
         <Grid Grid.Row="1">
@@ -66,5 +67,11 @@
                  Grid.Row="2"
                  Margin="12" 
                  TextWrapping="Wrap" />
+
+        <Button x:Name="btnSendMessage"
+                Content="Отправить сообщение"
+                Grid.Row="3" 
+                Height="25" Width="250" 
+                Margin="12"/>
     </Grid>
 </Window>
