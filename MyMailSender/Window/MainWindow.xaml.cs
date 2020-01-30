@@ -23,6 +23,8 @@ namespace MyMailSender
         public MainWindow()
         {
             InitializeComponent();
+
+            menuItemExit.Click += delegate { this.Close(); };
         }
     }
 }
