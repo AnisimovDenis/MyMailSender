@@ -51,14 +51,14 @@
             <TextBlock Text="Пароль" 
                    Grid.Row="0" Grid.Column="2"
                    Margin="12" />
-            <PasswordBox x:Name="TextBoxPassword"
+            <PasswordBox x:Name="PasswordBox"
                          Grid.Row="0" Grid.Column="3"
                          Margin="12" />
 
             <TextBlock Text="Кому" 
                    Grid.Row="1" Grid.Column="0"
                    Margin="12" />
-            <TextBox x:Name="TextBoxTo"
+            <TextBox x:Name="TextBoxEmailTo"
                      Grid.Row="1" Grid.Column="1"
                      Grid.ColumnSpan="3"
                      Margin="12" />

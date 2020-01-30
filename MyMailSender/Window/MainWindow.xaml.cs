@@ -1,21 +1,7 @@
 ﻿using MyMailSender.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyMailSender
 {
@@ -35,17 +21,17 @@ namespace MyMailSender
         {
             if (string.IsNullOrEmpty(TextBoxEmail.Text))
             {
-                MB.MessageBoxError("Введите email.");
+                MB.MessageBoxError("Введите emailUser.");
                 TextBoxEmail.Focus();
             }
-            else if (string.IsNullOrEmpty(TextBoxPassword.Password))
+            else if (string.IsNullOrEmpty(PasswordBox.Password))
             {
                 MB.MessageBoxError("Введите пароль.");
-                TextBoxPassword.Focus();
+                PasswordBox.Focus();
             }
-            else if (string.IsNullOrEmpty(TextBoxTo.Text))
+            else if (string.IsNullOrEmpty(TextBoxEmailTo.Text))
             {
-                MB.MessageBoxError("Введите email, кому вы отправляете сообщение.");
+                MB.MessageBoxError("Введите emailUser, кому вы отправляете сообщение.");
                 TextBoxEmail.Focus();
             }
             else if (string.IsNullOrEmpty(TextBoxMessage.Text))
@@ -55,37 +41,16 @@ namespace MyMailSender
             }
             else
             {
-                try
-                {
-                    using (var message = new MailMessage(TextBoxEmail.Text, TextBoxTo.Text))
-                    {
-                        message.Subject = TextBoxSubject.Text;
-                        message.Body = TextBoxMessage.Text;
+                string emailUser = TextBoxEmail.Text;
+                SecureString password = PasswordBox.SecurePassword;
+                string emailTo = TextBoxEmailTo.Text;
 
+                MySender mySender = new MySender(emailUser, password, emailTo);
 
-                        const string serverAddress = "smtp.mail.ru";
-                        const int serverPort = 25; 
-                        using (var client = new SmtpClient(serverAddress, serverPort))
-                        {
-                            client.EnableSsl = true;
+                string subjectMsg = TextBoxSubject.Text;
+                string bodyMsg = TextBoxMessage.Text;
 
-                            var userName = TextBoxEmail.Text;
-                            //var user_password = PasswordEdit.Password;
-                            SecureString userPassword = TextBoxPassword.SecurePassword;
-
-                            client.Credentials = new NetworkCredential(userName, userPassword);
-
-                            client.Send(message);
-
-                            MessageBox.Show("Почта отправлена!", "Ура!!!",
-                                MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                    }
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                mySender.Send(subjectMsg, bodyMsg);
             }
         }
     }
